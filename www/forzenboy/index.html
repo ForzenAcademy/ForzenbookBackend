@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="data:,">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>forzenboy</title>
+    <script type="module" src="./bundle.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            background: #666666;
+        }
+
+        canvas {
+            display: block;
+        }
+
+        .hide-mobile {
+            display: none !important;
+        }
+
+        .hide-desktop {
+            display: flex !important;
+        }
+
+        @media only screen and (max-width: 768px) {
+            body {
+                overflow: hidden;
+                background: black !important;
+            }
+
+            .canvas-wrapper {
+                width: 100%;
+            }
+
+            canvas {
+                width: 100vw;
+            }
+
+            .hide-mobile {
+                display: flex !important;
+            }
+
+            .hide-desktop {
+                display: none !important;
+            }
+        }
+
+        .child {
+            width: 50%;
+            display: flex;
+            align-items: flex-end;
+        }
+
+        .gameboy-button {
+            opacity: 0.4;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            background-color: #5c5c5c;
+            border-radius: 50%;
+            box-shadow: inset 0 0 0 5px #9c9c9c, inset 0 0 0 10px #404040;
+            font-family: 'Arial', sans-serif;
+            font-weight: bold;
+            font-size: 20px;
+            color: #1c1c1c;
+            text-align: center;
+            user-select: none;
+            transition: 0.1s ease-in-out;
+        }
+
+        .gameboy-button:active {
+            transform: translateY(2px);
+            box-shadow: inset 0 0 0 5px #9c9c9c, inset 0 0 0 8px #404040;
+        }
+
+        #buttons {
+            justify-content: flex-end;
+            padding: 0.5in;
+        }
+
+        #control-pane {
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 1.5in;
+            display: flex;
+        }
+
+        #joystick-container {
+            justify-content: flex-start;
+            padding: 0.33in;
+        }
+
+        .joystick {
+            position: relative;
+            width: 1in;
+            height: 1in;
+            border-radius: 50%;
+            opacity: 0.4;
+            border: 1px solid #fff;
+            background-color: #666;
+            user-select: none;
+        }
+
+        .joystick .inner-circle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0.66in;
+            height: 0.66in;
+            margin-top: -0.33in;
+            margin-left: -0.33in;
+            border-radius: 50%;
+            opacity: 0.4;
+            background-color: #fff;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="canvas-wrapper">
+        <canvas id="canvas" style="image-rendering: pixelated;"></canvas>
+    </div>
+    <div>
+        <p>Arrow keys to move</p>
+        <p>Z to select</p>
+        <p>X to Pause / Go back</p>
+    </div>
+    <div class="hide-mobile" id="control-pane">
+        <div class="child" id="joystick-container">
+            <div class="joystick">
+                <div class="inner-circle"></div>
+            </div>
+        </div>
+        <div class="child" id="buttons">
+            <div class="gameboy-button" style="transform: translateY(8mm);" id="xbutton">B</div>
+            <div class="gameboy-button" id="zbutton">A</div>
+        </div>
+    </div>
+</body>
+
+</html>
