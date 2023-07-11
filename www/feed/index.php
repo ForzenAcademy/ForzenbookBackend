@@ -13,9 +13,9 @@ if (!$conn) {
 }
 
 $headers = getallheaders();
-if(!array_key_exists("token", $headers)){
-  header("HTTP/1.1 401 Unauthorized");
-  die("{\"reason\":\"token not included\"}");
+if (!array_key_exists("token", $headers)) {
+    header("HTTP/1.1 401 Unauthorized");
+    die("{\"reason\":\"token not included\"}");
 }
 $token = getallheaders()["token"];
 
@@ -44,7 +44,7 @@ if (mysqli_num_rows($result) > 0) {
     $output = array();
 
     // Fetch the data from the result object and store it in the array
-    while($row = mysqli_fetch_assoc($result)) {
+    while ($row = mysqli_fetch_assoc($result)) {
         $output[] = $row;
     }
 
@@ -59,4 +59,3 @@ if (mysqli_num_rows($result) > 0) {
 
 // Close the database connection
 mysqli_close($conn);
-?>

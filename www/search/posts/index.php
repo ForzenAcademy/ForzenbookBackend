@@ -13,9 +13,9 @@ if (!$conn) {
 }
 
 $headers = getallheaders();
-if(!array_key_exists("token", $headers)){
-  header("HTTP/1.1 401 Unauthorized");
-  die("{\"reason\":\"token not included\"}");
+if (!array_key_exists("token", $headers)) {
+    header("HTTP/1.1 401 Unauthorized");
+    die("{\"reason\":\"token not included\"}");
 }
 $token = getallheaders()["token"];
 
@@ -34,13 +34,13 @@ if ($stmt->fetch()) {
     die();
 }
 
-if(!isset($_GET["uid"]) && !isset($_GET["q"])) {
+if (!isset($_GET["uid"]) && !isset($_GET["q"])) {
     header("HTTP/1.1 400 Bad Request");
     die("{\"reason\":\"missing field\"}");
 }
 
 
-if(isset($_GET["uid"])) {
+if (isset($_GET["uid"])) {
     $uid = $_GET["uid"];
 
     // Retrieve data from the posts table
@@ -63,7 +63,7 @@ if(isset($_GET["uid"])) {
     // Close the database connection
     mysqli_close($conn);
 } else { // posts
-    $q = "%".$_GET["q"]."%";
+    $q = "%" . $_GET["q"] . "%";
 
     // Retrieve data from the posts table
     $stmt = $conn->prepare("SELECT * FROM posts WHERE body LIKE ? ORDER BY created_at DESC");
@@ -85,5 +85,3 @@ if(isset($_GET["uid"])) {
     // Close the database connection
     mysqli_close($conn);
 }
-
-?>
