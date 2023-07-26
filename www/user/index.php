@@ -9,6 +9,9 @@ $username = "worker";
 $password = "swiffcat";
 $db = "socialmedia";
 
+$ABOUT_ME_DEFAULT = "ABOUT_ME_DEFAULT_VALUE";
+$DEFAULT_ICON = "upload/pp_default.jpg";
+
 // If not GET or POST, 403
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
@@ -81,13 +84,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   // Add user to DB
-  $stmt = $conn->prepare("INSERT INTO users (email, birth_date, first_name, last_name, location) VALUES (?,?,?,?,?)");
-  $stmt->bind_param("sssss", $a1, $a2, $a3, $a4, $a5);
+  $stmt = $conn->prepare("INSERT INTO users (email, birth_date, first_name, last_name, location, about_me, profile_image) VALUES (?,?,?,?,?,?,?)");
+  $stmt->bind_param("sssssss", $a1, $a2, $a3, $a4, $a5, $a6, $a7);
   $a1 = $email;
   $a2 = $birthDate;
   $a3 = $firstName;
   $a4 = $lastName;
   $a5 = $location;
+  $a6 = $ABOUT_ME_DEFAULT;
+  $a7 = $DEFAULT_ICON;
   $stmt->execute();
 } else if ($_SERVER['REQUEST_METHOD'] === 'GET') {
   if (!isset($_GET["id"])) {
@@ -115,7 +120,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   if ($result->num_rows > 0) {
     // Fetch the data as an associative array
     $row = $result->fetch_assoc();
-    $row["avatarUrl"] = "https://e1.pxfuel.com/desktop-wallpaper/981/638/desktop-wallpaper-ghim-c%E1%BB%A7a-emo-tren-cute-avatar-trong-2020-kawaii-cute-avatars-thumbnail.jpg";
 
     // Convert the associative array to a JSON string
     $json = json_encode($row);
