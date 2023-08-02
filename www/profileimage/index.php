@@ -90,6 +90,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $a1 = $image;
     $a2 = $user_id;
     $stmt->execute();
+
+    $outJson = array();
+    $outJson["image"] = $image;
+
+    echo json_encode($outJson);
+
     mysqli_close($conn);
 } else {
     header("HTTP/1.1 403 Forbidden");
